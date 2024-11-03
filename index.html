@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Beer Rankings</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { text-align: center; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .top-ten { list-style-type: none; padding: 0; }
+        .top-ten-title { font-weight: bold; margin-top: 20px; }
+        .link-button { margin-top: 20px; display: block; text-align: center; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>World Beer Rankings</h1>
+    
+    <!-- Top 10 Beers Section -->
+    <h2 class="top-ten-title">Top 10 Beers</h2>
+    <ul class="top-ten" id="topTenList">
+        <!-- Top 10 beers will be displayed here -->
+    </ul>
+
+    <!-- Link to All Beers Page -->
+    <a href="all-beers.html" class="link-button">View All Beers</a>
+</div>
+
+<script>
+    // Sample beer data
+    let beers = [
+        { name: "Beer A", region: "Europe", country: "Germany", alcohol: 5.0, flavor: 8, aroma: 7, color: 6, price: 4, drinkability: 9 },
+        { name: "Beer B", region: "North America", country: "USA", alcohol: 6.5, flavor: 9, aroma: 8, color: 5, price: 3, drinkability: 8 },
+        // Add more sample beers as needed
+    ];
+
+    // Function to calculate the average rating
+    function calculateRating(beer) {
+        return (beer.flavor + beer.aroma + beer.color + beer.price + beer.drinkability) / 5;
+    }
+
+    // Function to display top 10 beers by rating
+    function displayTopTen() {
+        const topTenList = document.getElementById('topTenList');
+        topTenList.innerHTML = '';
+        let sortedBeers = [...beers].sort((a, b) => calculateRating(b) - calculateRating(a)).slice(0, 10);
+        sortedBeers.forEach(beer => {
+            let li = document.createElement('li');
+            li.textContent = `${beer.name} - Rating: ${calculateRating(beer).toFixed(1)}`;
+            topTenList.appendChild(li);
+        });
+    }
+
+    // Initial display
+    displayTopTen();
+</script>
+</body>
+</html>
